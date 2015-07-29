@@ -18,7 +18,13 @@
 
 # include <stdio.h>
 
-#ifdef VC2005
+#if _MSC_VER <= 1310
+
+# define snprintf						_snprintf
+# define snprsize(n)					(n)
+
+#elif _MSC_VER <= 1800
+
 # define sscanf							sscanf_s
 # define snprintf						_snprintf_s
 # define snprsize(n)					(n),_TRUNCATE
@@ -29,9 +35,10 @@
 inline FILE * fopens (const char * file, const char* mode) 
 { FILE* fd; errno_t err = fopen_s(&fd, file,mode); if(err) fd=0; return fd; }
 
-#elif defined (VC6)
-# define snprintf						_snprintf
-# define snprsize(n)					(n)
+#else
+
+#error Unknown MSVC version; please update definitions.
+
 #endif
 
 #else
