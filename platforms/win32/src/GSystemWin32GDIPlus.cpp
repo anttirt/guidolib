@@ -26,12 +26,17 @@ using namespace std;
 #include "GFontWin32GDIPlus.h"
 #include "GDeviceWin32GDIPlus.h"
 
+static ULONG_PTR gGdiplusToken = 0;
+
 GUIDOAPI(GuidoErrCode) GuidoInitGDIPlusWithHDC(void* dispHDC, VGSystem** vgsystem, VGDevice** vgdevice)
 {
 	GuidoInitDesc desc;
 
 	if(vgsystem == NULL || vgdevice == NULL)
 		return guidoErrBadParameter;
+
+	GdiplusStartupInput input;
+	GdiplusStartup(&gGdiplusToken, &input, NULL);
 
 	PrivateFontCollection* fc = new PrivateFontCollection();
 	fc->AddFontFile(L"Guido2.ttf");
@@ -63,6 +68,9 @@ GSystemWin32GDIPlus::GSystemWin32GDIPlus( HDC dispDC, HDC printDC, FontCollectio
 GSystemWin32GDIPlus::~GSystemWin32GDIPlus()
 {
 	delete mFontCollection;
+
+	if (gGdiplusToken) GdiplusShutdown(gGdiplusToken);
+	gGdiplusToken = 0;
 }
 
 // --------------------------------------------------------------
