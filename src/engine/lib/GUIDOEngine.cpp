@@ -138,6 +138,14 @@ GUIDOAPI(GuidoErrCode) GuidoInit( GuidoInitDesc * desc )
 	return guidoNoErr;
 }
 
+GUIDOAPI(GuidoErrCode) GuidoNotifySize(VGDevice* vgdevice, int newWidth, int newHeight)
+{
+	if(vgdevice == NULL)
+		return guidoErrBadParameter;
+	vgdevice->NotifySize(newWidth, newHeight);
+	return guidoNoErr;
+}
+
 GUIDOAPI(GuidoErrCode) GuidoDestroyVGSystem(VGSystem* system)
 {
 	if(system == NULL)
