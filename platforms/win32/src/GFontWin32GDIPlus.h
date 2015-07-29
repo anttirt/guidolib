@@ -56,7 +56,8 @@ class_export GFontWin32GDIPlus : public VGFont
 {
 	public:
 								GFontWin32GDIPlus(	Font* nativeFont, const char* faceName, 
-													int size, int properties );
+													int size, int properties,
+													FontCollection* fontCollection);
 								virtual	~GFontWin32GDIPlus();
 
 		virtual	const char*		GetName() const			{ return mName.c_str(); }

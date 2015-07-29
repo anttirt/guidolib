@@ -25,7 +25,8 @@
 
 // --------------------------------------------------------------
 GFontWin32GDIPlus::GFontWin32GDIPlus( Font* nativeFont, const char * faceName, 
-									  int size, int properties) 
+									  int size, int properties,
+									  FontCollection* fontCollection) 
 						: mNativeFont(nativeFont), mName(faceName),
 						  mSize(size), mFontProp(properties)
 {
@@ -33,8 +34,7 @@ GFontWin32GDIPlus::GFontWin32GDIPlus( Font* nativeFont, const char * faceName,
 	WCHAR * wstr = (WCHAR*) malloc ((count + 1) * sizeof(WCHAR));
 	mbstowcs(wstr, faceName, strlen(faceName));
 	wstr[count] = L'\0';
-	FontCollection fc;
-	FontFamily ff (wstr, &fc);
+	FontFamily ff (wstr, fontCollection);
 	int style;
 	switch (properties) {
 		case kFontBold:
