@@ -21,9 +21,28 @@
 #include <iostream>
 using namespace std;
 
+#include "GUIDOEngine.h"
 #include "GSystemWin32GDIPlus.h"
 #include "GFontWin32GDIPlus.h"
 #include "GDeviceWin32GDIPlus.h"
+
+GUIDOAPI(GuidoErrCode) GuidoInitGDIPlusWithHDC(void* dispHDC, VGSystem** vgsystem, VGDevice** vgdevice)
+{
+	GuidoInitDesc desc;
+
+	if(vgsystem == NULL || vgdevice == NULL)
+		return guidoErrBadParameter;
+
+	PrivateFontCollection* fc = new PrivateFontCollection();
+	fc->AddFontFile(L"Guido2.ttf");
+
+	*vgsystem = new GSystemWin32GDIPlus(static_cast<HDC>(dispHDC), nullptr, fc);
+	*vgdevice = desc.graphicDevice = (*vgsystem)->CreateDisplayDevice();
+	desc.musicFont = "Guido2";
+	desc.textFont  = "Times";
+	GuidoErrCode errcode = GuidoInit (&desc);
+	return errcode;
+}
 
 #pragma warning (disable : 4996)	// for _CRT_SECURE_NO_DEPRECATE
 

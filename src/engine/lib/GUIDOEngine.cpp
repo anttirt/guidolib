@@ -138,6 +138,22 @@ GUIDOAPI(GuidoErrCode) GuidoInit( GuidoInitDesc * desc )
 	return guidoNoErr;
 }
 
+GUIDOAPI(GuidoErrCode) GuidoDestroyVGSystem(VGSystem* system)
+{
+	if(system == NULL)
+		return guidoErrBadParameter;
+	delete system;
+	return guidoNoErr;
+}
+
+GUIDOAPI(GuidoErrCode) GuidoDestroyVGDevice(VGDevice* device)
+{
+	if(device == NULL)
+		return guidoErrBadParameter;
+	delete device;
+	return guidoNoErr;
+}
+
 // ------------------------------------------------------------------------
 GUIDOAPI(void) GuidoShutdown()
 {

@@ -28,6 +28,7 @@
 #endif
 
 
+class VGSystem;
 class VGDevice;
 
 struct NodeAR;
@@ -303,6 +304,30 @@ representations.
         where structures cannot be easily manipulated.
     */
     GUIDOAPI(GuidoErrCode)      GuidoInitWithIndependentSVG();
+
+#ifdef _WIN32
+	/*!
+        Initialises the Guido Engine with the Win32 system using the given display HDC.
+    */
+    GUIDOAPI(GuidoErrCode)      GuidoInitWin32WithHDC(void* dispHDC, VGSystem** vgsystem, VGDevice** vgdevice);
+
+	/*!
+        Initialises the Guido Engine with the GDI+ system using the given display
+        and print HDCs.
+    */
+    GUIDOAPI(GuidoErrCode)      GuidoInitGDIPlusWithHDC(void* dispHDC, VGSystem** vgsystem, VGDevice** vgdevice);
+#endif
+
+	/*!
+		Destroy a VGSystem created by an earlier call.
+	*/
+	GUIDOAPI(GuidoErrCode)      GuidoDestroyVGSystem(VGSystem* system);
+
+	/*!
+		Destroy a VGDevice created by an earlier call.
+	*/
+	GUIDOAPI(GuidoErrCode)      GuidoDestroyVGDevice(VGDevice* device);
+
 	/*!
         Guido Engine shutdown
 		

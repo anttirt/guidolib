@@ -18,11 +18,27 @@
 
 */
 
+#include "GUIDOEngine.h"
 #include "GSystemWin32.h"
 #include "GFontWin32.h"
 #include "GDeviceWin32.h"
 #include "GDeviceWin32AntiAliased.h"
 #include "secureio.h"
+
+GUIDOAPI(GuidoErrCode) GuidoInitWin32WithHDC(void* dispHDC, VGSystem** vgsystem, VGDevice** vgdevice)
+{
+	GuidoInitDesc desc;
+
+	if(vgsystem == NULL || vgdevice == NULL)
+		return guidoErrBadParameter;
+
+	*vgsystem = new GSystemWin32(static_cast<HDC>(dispHDC), NULL);
+	*vgdevice = desc.graphicDevice = (*vgsystem)->CreateDisplayDevice();
+	desc.musicFont = "Guido2";
+	desc.textFont  = "Times";
+	GuidoErrCode errcode = GuidoInit (&desc);
+	return errcode;
+}
 
 // --------------------------------------------------------------
 GSystemWin32::GSystemWin32(	HDC dispDC, HDC printDC ) 
