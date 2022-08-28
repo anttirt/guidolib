@@ -30,6 +30,11 @@
 # pragma warning (disable : 4275 4251)
 #endif
 
+namespace Gdiplus
+{
+	class FontCollection;
+}
+
 #include "GUIDOExport.h"
 #include "VGSystem.h"
 //#include "MusicalSymbols.h"	// kMaxMusicalSymbolID and other constants definitions
@@ -72,6 +77,7 @@ class_export GSystemWin32GDIPlus : public VGSystem
 {					
 	public:
 								 GSystemWin32GDIPlus( HDC dispDC, HDC printDC );
+								 GSystemWin32GDIPlus( HDC dispDC, HDC printDC, Gdiplus::FontCollection* fc );
 		virtual					~GSystemWin32GDIPlus();
 
 		// - VGDevice services -------------------------------------------
@@ -112,6 +118,8 @@ class_export GSystemWin32GDIPlus : public VGSystem
 		static  ULONG_PTR		mGdiplusToken;
 				HDC				mDispDC;
 				HDC				mPrintDC;
+
+		Gdiplus::FontCollection* mFontCollection;
 };
 
 #endif

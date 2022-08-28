@@ -35,8 +35,15 @@ GSystemWin32GDIPlus::GSystemWin32GDIPlus( HDC dispDC, HDC printDC )
 }
 
 // --------------------------------------------------------------
+GSystemWin32GDIPlus::GSystemWin32GDIPlus( HDC dispDC, HDC printDC, FontCollection* fc )
+					: mDispDC(dispDC), mPrintDC(printDC), mFontCollection(fc)
+{
+}
+
+// --------------------------------------------------------------
 GSystemWin32GDIPlus::~GSystemWin32GDIPlus()
 {
+	delete mFontCollection;
 }
 
 // --------------------------------------------------------------
@@ -128,8 +135,8 @@ const VGFont* GSystemWin32GDIPlus::CreateVGFont( const char * faceName, int size
 	}
 
 //	Font* gdiFont = new Font(wFamily, (REAL)size, (FontStyle)style, UnitPixel);
-	Font* gdiFont = new Font(wFamily, (REAL)size, (FontStyle)style, UnitWorld);
-	GFontWin32GDIPlus * outFont = new GFontWin32GDIPlus( gdiFont, faceName, size, properties);	
+	Font* gdiFont = new Font(wFamily, (REAL)size, (FontStyle)style, UnitWorld, mFontCollection);
+	GFontWin32GDIPlus * outFont = new GFontWin32GDIPlus( gdiFont, faceName, size, properties, mFontCollection);	
 	free (wFamily);
 	return outFont;
 }
