@@ -298,6 +298,8 @@ representations.
     */
     GUIDOAPI(GuidoErrCode)	GuidoInit(GuidoInitDesc * desc);
 
+	GUIDOAPI(GuidoErrCode)  GuidoNotifySize(VGDevice* vgdevice, int newWidth, int newHeight);
+
 	/*!
         Initialises the Guido Engine with an independent SVG device, avoiding
         the need to pass a description. Useful for contexts (like javascript)
