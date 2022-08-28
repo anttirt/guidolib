@@ -32,6 +32,7 @@ GFontWin32GDIPlus::GFontWin32GDIPlus( Font* nativeFont, const char * faceName,
 	DWORD count = (DWORD)mbstowcs(NULL, faceName, strlen(faceName));
 	WCHAR * wstr = (WCHAR*) malloc ((count + 1) * sizeof(WCHAR));
 	mbstowcs(wstr, faceName, strlen(faceName));
+	wstr[count] = L'\0';
 	FontCollection fc;
 	FontFamily ff (wstr, &fc);
 	int style;
