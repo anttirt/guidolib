@@ -111,7 +111,7 @@ char * GRSingleNote::getGGSInfo( int infotype ) const
 
 	GRSystem * cursystem = mGrStaff->getGRSystem();
 
-#ifdef VC2005
+#if _MSC_VER >= 1400
 	snprintf(buf, 100, 100, "%d,%d,%d,%d,%ld,%d,%ld,%d\n",
 		(int)cursystem->getGRPage()->getMarginLeft(),
 		(int)cursystem->getPosition().x,

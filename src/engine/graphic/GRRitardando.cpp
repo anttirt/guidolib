@@ -24,6 +24,8 @@
 
 #include "VGDevice.h"
 
+#include <algorithm>
+
 extern GRSystem * gCurSystem;
 
 // extern GFontRef hfonttext;
