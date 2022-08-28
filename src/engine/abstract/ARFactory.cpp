@@ -952,7 +952,7 @@ void ARFactory::createTag( const char * name, int no )
 				mTags.AddHead(tmp);
 				mCurrentVoice->AddPositionTag(tmp);
 			}
-			else if (!strcmp(name,"decrescEnd") || !strcmp(name,"dimEnd") || !strcmp(name,"diminuendoBegin")) {
+			else if (!strcmp(name,"decrescEnd") || !strcmp(name,"dimEnd") || !strcmp(name,"diminuendoEnd")) {
 				ARDummyRangeEnd * tmp = new ARDummyRangeEnd("\\dimEnd");			
 				tmp->setID(no);
 				mCurrentVoice->setPositionTagEndPos( no, tmp );
